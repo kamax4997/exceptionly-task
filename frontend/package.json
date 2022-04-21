@@ -1,0 +1,101 @@
+{
+  "name": "exceptionly-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@hookform/resolvers": "^2.8.8",
+    "@mui/icons-material": "^5.6.2",
+    "@mui/material": "^5.6.2",
+    "@reduxjs/toolkit": "^1.7.1",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^16.11.19",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-redux": "^7.1.21",
+    "@types/redux-persist": "^4.3.1",
+    "axios": "^0.24.0",
+    "history": "^5.3.0",
+    "prop-types": "^15.8.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.30.0",
+    "react-loading-skeleton": "^3.0.3",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^5.3.1",
+    "react-scripts": "5.0.0",
+    "react-toastify": "^8.2.0",
+    "recharts": "^2.1.8",
+    "redux": "^4.1.2",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.1",
+    "sass": "^1.46.0",
+    "typescript": "^4.5.4",
+    "web-vitals": "^2.1.3",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./",
+    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx  --fix ./",
+    "prettier:fix": "prettier --write --ext .js,.jsx,.ts,.tsx,.json ./",
+    "prettier:check": "prettier --check --ext .js,.jsx,.ts,.tsx,.json ./",
+    "typecheck": "bash -c tsc --noEmit -p ."
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@cypress/react": "^5.12.1",
+    "@cypress/webpack-dev-server": "^1.8.0",
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.1.0",
+    "@types/react-router-dom": "^5.3.2",
+    "@typescript-eslint/eslint-plugin": "^5.9.0",
+    "@typescript-eslint/parser": "^5.9.0",
+    "chai": "^4.3.6",
+    "cypress": "^9.3.1",
+    "eslint": "8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-jest": "^25.3.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "7.28.0",
+    "eslint-plugin-react-hooks": "4.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.5",
+    "mocha": "^9.2.0",
+    "prettier": "^2.5.1",
+    "ts-node": "^10.4.0"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "npm run lint:fix",
+      "npm run prettier:fix"
+    ],
+    "**/*.{ts,tsx}": "npm run typecheck"
+  }
+}

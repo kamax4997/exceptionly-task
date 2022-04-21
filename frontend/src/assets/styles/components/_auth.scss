@@ -1,0 +1,223 @@
+.auth {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../../images/Background.svg');
+
+  .auth__container {
+    width: 50%;
+    min-width: 420px;
+    max-width: 936px;
+    height: auto;
+    display: flex;
+    position: relative;
+
+    @media screen and (max-width: 900px) {
+      width: 100%;
+      height: 100%;
+    }
+    @media (min-width: 900px) and (max-width: 1430px) {
+      width: 80%;
+    }
+
+    .auth__leftSide {
+      display: flex;
+      align-items: center;
+      position: relative;
+      justify-content: center;
+      background-color: #252525;
+      border-radius: 4px 0 0 4px;
+      width: 50%;
+      height: auto;
+      min-height: 50vh;
+      transition: all 0.25s ease-out;
+      color: white;
+
+      @media screen and (max-width: 900px) {
+        display: none;
+      }
+
+      .auth__leftSide__logo {
+        min-width: 140px;
+        width: 200px;
+      }
+      .auth__leftSide__logo-img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 120px;
+      }
+      .auth__leftSide__bottom {
+        width: 76%;
+        position: absolute;
+        text-align: center;
+        bottom: 7vh;
+
+        .auth__leftSide__bottom-subtitle {
+          font-size: 16px;
+          margin-bottom: 2vh;
+        }
+        .auth__leftSide__bottom-description {
+          font-size: 14px;
+        }
+      }
+    }
+    .auth__rightSide {
+      position: relative;
+      background-color: #fff;
+      border-radius: 0 4px 4px 0;
+      width: 50%;
+      height: auto;
+      min-height: 50vh;
+      transition: all 0.25s ease-out;
+
+      @media screen and (max-width: 900px) {
+        width: 100%;
+      }
+
+      .auth_rightSide_top {
+        margin: 0 auto;
+        max-width: 400px;
+        padding: 6vh 10% 8vh;
+
+        .auth__rightSide__logo {
+          text-align: center;
+
+          .auth__rightSide__title {
+            margin-top: 1vh;
+            opacity: 1;
+            font-size: 20px;
+            animation: TextOutAnimation 0.25s ease-out;
+          }
+          .auth__rightSide__logo-img {
+            width: 150px;
+            max-width: 180px;
+            height: auto;
+          }
+        }
+        .auth__signin-forget-remember {
+          display: flex;
+          align-items: center;
+          margin-top: 10px;
+        }
+        .auth__vertical-center {
+          @media screen and (max-width: 900px) {
+            width: 80%;
+            max-width: 400px;
+            position: absolute;
+            -webkit-transform: translate(-50%, -47%);
+            transform: translate(-50%, -47%);
+            left: 50%;
+            top: 50%;
+          }
+        }
+        .auth__signIn-actions {
+          margin: 0;
+          animation: signInActionsAnimation 0.25s ease-out;
+        }
+        .auth__signIn__form {
+          display: block;
+          animation: signInFormInAnimation 0.25s ease-out;
+        }
+        .auth__signUp-actions {
+          margin: 0;
+          animation: signUpActionsAnimation 0.25s ease-in;
+          display: flex;
+          justify-content: center;
+          margin-top: 16px;
+        }
+        .auth__signUp__form {
+          display: block;
+          animation: signUpFormInAnimation 0.25s ease-out;
+        }
+      }
+
+      .auth__rightSide__bottom {
+        position: absolute;
+        width: 100%;
+        padding: 1.35vh 8%;
+        background-color: rgba(37, 37, 37, 0.9);
+        border-radius: 0 0 4px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        color: white;
+        bottom: 0;
+        font-size: 14px;
+
+        @media screen and (max-width: 900px) {
+          position: fixed;
+          border-radius: 0;
+        }
+        .auth__rightSide__bottom-title {
+          color: #4285f4;
+          font-size: 14px;
+          animation: TextOutAnimation 0.25s ease-out;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .auth__invalid-feedback {
+    display: block !important;
+    color: red;
+    font-size: 11px;
+  }
+  .auth__button {
+    margin-top: 1.5vh;
+    padding: 6px 0;
+    font-size: 14px;
+    background-color: #4285f4;
+  }
+  .auth__signup-button {
+    padding: 12px;
+    min-width: 0;
+    background-color: #4285f4;
+  }
+}
+
+@keyframes signInActionsAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes signInFormInAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes signUpActionsAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes signUpFormInAnimation {
+  0% {
+    opacity: 1;
+    transform: translateY(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
