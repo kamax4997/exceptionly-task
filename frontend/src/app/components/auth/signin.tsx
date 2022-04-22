@@ -4,6 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useDispatch } from 'react-redux'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import axiosInstance from 'app/services/axiosService'
+import { refreshTokenSetup } from '../../utils/refreshToken'
+import { useGoogleLogin } from 'react-google-login'
 import {
   Box,
   Typography,
@@ -50,6 +52,33 @@ const SignIn: React.FC = () => {
       toast.error(result.data.message ? result.data.message : 'Login Failed!')
     }
   }
+
+  const onSuccess = async (res: any) => {
+    console.log('Login Success: currentUser:', res)
+    if (res.profileObj.email) {
+      toast.success('Login Success! 😍')
+      await dispatch(login(res.accessToken))
+    } else {
+      toast.error('Login Failed!')
+    }
+    
+    refreshTokenSetup(res)
+  }
+
+  const onFailure = (res: any) => {
+    console.log('Login failed: res:', res)
+    alert(
+      `Failed to login. 😢`
+    )
+  }
+
+  const { signIn } = useGoogleLogin({
+    onSuccess,
+    onFailure,
+    clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID || '',
+    isSignedIn: true,
+    accessType: 'offline',
+  })
 
   return (
     <Box className="auth__vertical-center">
@@ -122,6 +151,7 @@ const SignIn: React.FC = () => {
           fullWidth
           variant="contained"
           className="auth__button"
+          onClick={signIn}
         >
           <Google sx={{ marginRight: '8px' }} />
           SIGN IN WITH GOOGLE
