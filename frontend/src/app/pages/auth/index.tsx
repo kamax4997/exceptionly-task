@@ -34,7 +34,7 @@ const Auth: React.FC = () => {
             </Typography>
           </Box>
         </Box>
-        <Box className="auth__rightSide">
+        <Box className="auth__rightSide" style={isLogin? {minHeight: '74vh'} : {minHeight: '90vh'}}>
           <Box className="auth_rightSide_top">
             <Box className="auth__rightSide__logo">
               <img

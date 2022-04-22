@@ -37,12 +37,14 @@ const SignIn: React.FC = () => {
       .required('Password is mendatory')
       .min(3, 'Password must be at 3 char long'),
   })
-  const formOptions = { resolver: yupResolver(formSchema) }
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInputs>(formOptions)
+    setError
+  } = useForm<IFormInputs>({ mode: 'onChange', resolver: yupResolver(formSchema) })
+
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
     const result = await axiosInstance.post('login', data)
     if (result.data.accessToken) {
@@ -67,9 +69,6 @@ const SignIn: React.FC = () => {
 
   const onFailure = (res: any) => {
     console.log('Login failed: res:', res)
-    alert(
-      `Failed to login. 😢`
-    )
   }
 
   const { signIn } = useGoogleLogin({
@@ -98,7 +97,12 @@ const SignIn: React.FC = () => {
           error={errors.email ? true : false}
           InputProps={{ style: { fontSize: 16 } }}
           InputLabelProps={{ style: { fontSize: 16 } }}
-          sx={{ marginBottom: '0px', transition: 'all 0.25s' }}
+          onFocus={(e) => {
+            if(!e.target.value)
+              setError('email', {
+                message: 'Email is required'
+              })
+          }}
           {...register('email')}
         />
         <div className="auth__invalid-feedback">{errors.email?.message}</div>
@@ -113,8 +117,13 @@ const SignIn: React.FC = () => {
           variant="standard"
           InputProps={{ style: { fontSize: 16 } }}
           InputLabelProps={{ style: { fontSize: 16 } }}
-          sx={{ marginBottom: '0px', transition: 'all 0.25s' }}
           error={errors.password ? true : false}
+          onFocus={(e) => {
+            if(!e.target.value)
+              setError('password', {
+                message: 'Password is required'
+              })
+          }}
           {...register('password')}
         />
         <div className="auth__invalid-feedback">{errors.password?.message}</div>
@@ -126,7 +135,7 @@ const SignIn: React.FC = () => {
             />
           </Grid>
           <Grid item>
-            <Link href="#" variant="body2" sx={{ fontSize: '14px' }}>
+            <Link href="#" variant="body2" sx={{ fontSize: '14px', textDecoration: 'none' }}>
               Forgot password?
             </Link>
           </Grid>
@@ -152,6 +161,7 @@ const SignIn: React.FC = () => {
           variant="contained"
           className="auth__button"
           onClick={signIn}
+          sx={{ boxShadow: 'unset' }}
         >
           <Google sx={{ marginRight: '8px' }} />
           SIGN IN WITH GOOGLE
@@ -160,8 +170,7 @@ const SignIn: React.FC = () => {
           type="submit"
           fullWidth
           variant="contained"
-          className="auth__button"
-          sx={{ backgroundColor: '#2867B2 !important' }}
+          className="auth__button-blue"
         >
           <LinkedIn sx={{ marginRight: '8px' }} />
           SIGN IN WITH LINKDIN
@@ -170,8 +179,7 @@ const SignIn: React.FC = () => {
           type="submit"
           fullWidth
           variant="contained"
-          className="auth__button"
-          sx={{ backgroundColor: '#f25022 !important' }}
+          className="auth__button-yellow "
         >
           <Dashboard sx={{ marginRight: '8px' }} />
           SIGN IN WITH MICROSOFT

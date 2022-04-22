@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {ChangeEvent} from 'react'
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, SubmitHandler } from 'react-hook-form'
@@ -41,12 +41,12 @@ const SignUp: React.FC<ISignUp> = (props: ISignUp) => {
       .oneOf([Yup.ref('password')], 'Passwords does not match'),
   })
 
-  const formOptions = { resolver: yupResolver(formSchema) }
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IFormInputs>(formOptions)
+    setError
+  } = useForm<IFormInputs>({ mode: 'onChange', resolver: yupResolver(formSchema) })
 
   const onSubmit: SubmitHandler<IFormInputs> = async (data) => {
     const result = await axiosInstance.post('users', data)
@@ -78,6 +78,12 @@ const SignUp: React.FC<ISignUp> = (props: ISignUp) => {
           error={errors.firstName ? true : false}
           sx={{ marginBottom: '0px' }}
           {...register('firstName')}
+          onFocus={(e) => {
+            if(!e.target.value)
+              setError('firstName', {
+                message: 'The Field is required'
+              })
+          }}
         />
         <div className="auth__invalid-feedback">
           {errors.firstName?.message}
@@ -95,6 +101,12 @@ const SignUp: React.FC<ISignUp> = (props: ISignUp) => {
           sx={{ marginBottom: '0px' }}
           error={errors.lastName ? true : false}
           {...register('lastName')}
+          onFocus={(e) => {
+            if(!e.target.value)
+              setError('lastName', {
+                message: 'The Field is required'
+              })
+          }}
         />
         <div className="auth__invalid-feedback">{errors.lastName?.message}</div>
         <TextField
@@ -111,6 +123,12 @@ const SignUp: React.FC<ISignUp> = (props: ISignUp) => {
           sx={{ marginBottom: '0px' }}
           error={errors.email ? true : false}
           {...register('email')}
+          onFocus={(e) => {
+            if(!e.target.value)
+              setError('email', {
+                message: 'The Field is required'
+              })
+          }}
         />
         <div className="auth__invalid-feedback">{errors.email?.message}</div>
         <TextField
@@ -127,6 +145,12 @@ const SignUp: React.FC<ISignUp> = (props: ISignUp) => {
           sx={{ marginBottom: '0px' }}
           error={errors.confirmEmail ? true : false}
           {...register('confirmEmail')}
+          onFocus={(e) => {
+            if(!e.target.value)
+              setError('confirmEmail', {
+                message: 'The Field is required'
+              })
+          }}
         />
         <div className="auth__invalid-feedback">
           {errors.confirmEmail?.message}
@@ -145,6 +169,12 @@ const SignUp: React.FC<ISignUp> = (props: ISignUp) => {
           sx={{ marginBottom: '0px' }}
           error={errors.password ? true : false}
           {...register('password')}
+          onFocus={(e) => {
+            if(!e.target.value)
+              setError('password', {
+                message: 'The Field is required'
+              })
+          }}
         />
         <div className="auth__invalid-feedback">{errors.password?.message}</div>
         <TextField
@@ -161,6 +191,12 @@ const SignUp: React.FC<ISignUp> = (props: ISignUp) => {
           sx={{ marginBottom: '0px' }}
           error={errors.confirmPwd ? true : false}
           {...register('confirmPwd')}
+          onFocus={(e) => {
+            if(!e.target.value)
+              setError('confirmPwd', {
+                message: 'The Field is required'
+              })
+          }}
         />
         <div className="auth__invalid-feedback">
           {errors.confirmPwd?.message}
@@ -191,16 +227,14 @@ const SignUp: React.FC<ISignUp> = (props: ISignUp) => {
         <Button
           type="submit"
           variant="contained"
-          sx={{ backgroundColor: '#2867B2 !important' }}
-          className="auth__signup-button"
+          className="auth__signup-button-blue"
         >
           <LinkedIn />
         </Button>
         <Button
           type="submit"
           variant="contained"
-          sx={{ backgroundColor: '#F25022 !important' }}
-          className="auth__signup-button"
+          className="auth__signup-button-yellow"
         >
           <Dashboard />
         </Button>
